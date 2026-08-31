@@ -1,1 +1,967 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WebTheArt — Art Gallery</title>
+
+  <meta
+    name="description"
+    content="WebTheArt — Discover extraordinary artworks, artists and creative expression."
+  >
+
+  <style>
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #f4f1e8;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(15px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav {
+      max-width: 1400px;
+      height: 82px;
+      margin: auto;
+      padding: 0 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      font-weight: normal;
+      opacity: 0.55;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .nav-links a {
+      transition: opacity 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.5;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      padding: 160px 40px 80px;
+
+      display: flex;
+      align-items: center;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,0.9),
+          rgba(0,0,0,0.45),
+          rgba(0,0,0,0.75)
+        ),
+        url("https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=2200&q=90")
+        center / cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      margin-bottom: 25px;
+
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+
+      opacity: 0.65;
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 9vw, 125px);
+      font-weight: normal;
+      line-height: 0.9;
+
+      margin-bottom: 35px;
+    }
+
+    .hero p {
+      max-width: 550px;
+
+      color: #c7c2b8;
+      font-size: 19px;
+
+      margin-bottom: 40px;
+    }
+
+    .button {
+      display: inline-block;
+
+      padding: 15px 30px;
+
+      border: 1px solid #f4f1e8;
+
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #f4f1e8;
+      color: #0a0a0a;
+    }
+
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+      padding: 110px 40px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+
+      margin-bottom: 55px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(45px, 6vw, 75px);
+      font-weight: normal;
+      line-height: 1;
+    }
+
+    .section-header p {
+      max-width: 420px;
+
+      color: #99958c;
+
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       ART GALLERY
+    ========================= */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .art-card {
+      position: relative;
+      overflow: hidden;
+
+      background: #151515;
+
+      cursor: pointer;
+    }
+
+    .art-card.big {
+      grid-row: span 2;
+    }
+
+    .art-card img {
+      height: 430px;
+      object-fit: cover;
+
+      transition: transform 0.7s ease;
+    }
+
+    .art-card.big img {
+      height: 880px;
+    }
+
+    .art-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .art-overlay {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      width: 100%;
+
+      padding: 35px 25px;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,0.95)
+        );
+
+      transform: translateY(15px);
+      opacity: 0;
+
+      transition: 0.4s;
+    }
+
+    .art-card:hover .art-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .art-overlay small {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      opacity: 0.65;
+    }
+
+    .art-overlay h3 {
+      margin-top: 5px;
+
+      font-size: 25px;
+      font-weight: normal;
+    }
+
+
+    /* =========================
+       ABOUT WEBTHEART
+    ========================= */
+
+    .about {
+      background: #151515;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 100px;
+
+      align-items: center;
+    }
+
+    .about-image img {
+      height: 650px;
+      object-fit: cover;
+    }
+
+    .about-content h2 {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: normal;
+      line-height: 0.95;
+
+      margin-bottom: 35px;
+    }
+
+    .about-content p {
+      color: #aaa69e;
+      font-size: 18px;
+
+      margin-bottom: 20px;
+    }
+
+
+    /* =========================
+       COLLECTIONS
+    ========================= */
+
+    .collections {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .collection {
+      position: relative;
+
+      min-height: 390px;
+
+      padding: 35px;
+
+      display: flex;
+      align-items: end;
+
+      overflow: hidden;
+
+      background-position: center;
+      background-size: cover;
+    }
+
+    .collection::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background: rgba(0,0,0,0.4);
+
+      transition: 0.4s;
+    }
+
+    .collection:hover::before {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .collection-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .collection-content small {
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .collection h3 {
+      font-size: 40px;
+      font-weight: normal;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      text-align: center;
+      background: #0f0f0f;
+    }
+
+    .contact h2 {
+      font-size: clamp(55px, 8vw, 105px);
+      font-weight: normal;
+      line-height: 1;
+
+      margin-bottom: 25px;
+    }
+
+    .contact p {
+      max-width: 550px;
+
+      margin: 0 auto 40px;
+
+      color: #99958c;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 45px 40px;
+
+      border-top: 1px solid rgba(255,255,255,0.1);
+
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+
+      color: #777;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: auto;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      nav {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      .hero {
+        padding: 140px 20px 70px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .art-card.big {
+        grid-row: auto;
+      }
+
+      .art-card img,
+      .art-card.big img {
+        height: 500px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .about-image img {
+        height: 500px;
+      }
+
+      .collections {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-header p {
+        margin-top: 20px;
+      }
+
+      .footer-content {
+        display: block;
+      }
+
+      .footer-content div:last-child {
+        margin-top: 15px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+  <header>
+
+    <nav>
+
+      <a href="#" class="logo">
+        WebThe<span>Art</span>
+      </a>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="#gallery">Gallery</a>
+        </li>
+
+        <li>
+          <a href="#collections">Collections</a>
+        </li>
+
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Welcome to WebTheArt
+      </div>
+
+      <h1>
+        Art Beyond<br>
+        Boundaries.
+      </h1>
+
+      <p>
+        Welcome to WebTheArt — a curated space where
+        creativity, imagination and artistic expression
+        come together.
+      </p>
+
+      <a href="#gallery" class="button">
+        Enter Gallery
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       FEATURED GALLERY
+  ========================= -->
+
+  <section id="gallery">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <h2>
+          Featured Art
+        </h2>
+
+        <p>
+          Explore a selection of remarkable artworks
+          presented by WebTheArt.
+        </p>
+
+      </div>
+
+
+      <div class="gallery">
+
+
+        <!-- ART 1 -->
+
+        <div class="art-card big">
+
+          <img
+            src="https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=1200&q=90"
+            alt="Abstract artwork"
+          >
+
+          <div class="art-overlay">
+
+            <small>
+              Featured Artwork
+            </small>
+
+            <h3>
+              Beyond Silence
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- ART 2 -->
+
+        <div class="art-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1000&q=90"
+            alt="Modern artwork"
+          >
+
+          <div class="art-overlay">
+
+            <small>
+              Collection 01
+            </small>
+
+            <h3>
+              Inner World
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- ART 3 -->
+
+        <div class="art-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1000&q=90"
+            alt="Painting"
+          >
+
+          <div class="art-overlay">
+
+            <small>
+              Collection 02
+            </small>
+
+            <h3>
+              Dreams
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- ART 4 -->
+
+        <div class="art-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&w=1000&q=90"
+            alt="Contemporary artwork"
+          >
+
+          <div class="art-overlay">
+
+            <small>
+              Collection 03
+            </small>
+
+            <h3>
+              Fragments
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- ART 5 -->
+
+        <div class="art-card">
+
+          <img
+            src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1000&q=90"
+            alt="Gallery artwork"
+          >
+
+          <div class="art-overlay">
+
+            <small>
+              Featured
+            </small>
+
+            <h3>
+              Unknown Forms
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       ABOUT
+  ========================= -->
+
+  <section id="about" class="about">
+
+    <div class="container">
+
+      <div class="about-grid">
+
+
+        <div class="about-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1561214115-7c6b7c0c5e91?auto=format&fit=crop&w=1200&q=90"
+            alt="WebTheArt gallery"
+          >
+
+        </div>
+
+
+        <div class="about-content">
+
+          <div class="eyebrow">
+            About WebTheArt
+          </div>
+
+          <h2>
+            Where art<br>
+            finds a voice.
+          </h2>
+
+          <p>
+            WebTheArt is a creative art gallery dedicated
+            to discovering and presenting inspiring works
+            from talented artists.
+          </p>
+
+          <p>
+            Our goal is to create a place where art can be
+            discovered, appreciated and remembered.
+          </p>
+
+          <a href="#contact" class="button">
+            Contact WebTheArt
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       COLLECTIONS
+  ========================= -->
+
+  <section id="collections">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <h2>
+          Collections
+        </h2>
+
+        <p>
+          Explore different artistic styles and
+          creative perspectives.
+        </p>
+
+      </div>
+
+
+      <div class="collections">
+
+
+        <!-- COLLECTION 1 -->
+
+        <a
+          href="#"
+          class="collection"
+          style="
+            background-image:
+            url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=90');
+          "
+        >
+
+          <div class="collection-content">
+
+            <small>
+              01 — Collection
+            </small>
+
+            <h3>
+              Abstract
+            </h3>
+
+          </div>
+
+        </a>
+
+
+        <!-- COLLECTION 2 -->
+
+        <a
+          href="#"
+          class="collection"
+          style="
+            background-image:
+            url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=90');
+          "
+        >
+
+          <div class="collection-content">
+
+            <small>
+              02 — Collection
+            </small>
+
+            <h3>
+              Portraits
+            </h3>
+
+          </div>
+
+        </a>
+
+
+        <!-- COLLECTION 3 -->
+
+        <a
+          href="#"
+          class="collection"
+          style="
+            background-image:
+            url('https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=90');
+          "
+        >
+
+          <div class="collection-content">
+
+            <small>
+              03 — Collection
+            </small>
+
+            <h3>
+              Contemporary
+            </h3>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       CONTACT
+  ========================= -->
+
+  <section id="contact" class="contact">
+
+    <div class="container">
+
+      <div class="eyebrow">
+        WebTheArt
+      </div>
+
+      <h2>
+        Let's talk art.
+      </h2>
+
+      <p>
+        Interested in exhibitions, collaborations,
+        artwork submissions or working with WebTheArt?
+        We'd love to hear from you.
+      </p>
+
+      <a
+        href="mailto:webtheart@artlover.com"
+        class="button"
+      >
+        Contact WebTheArt
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-content">
+
+      <div>
+        © 2026 WebTheArt
+      </div>
+
+      <div>
+        Art · Culture · Expression
+      </div>
+
+    </div>
+
+  </footer>
+
+
+</body>
+</html>
