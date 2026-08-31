@@ -6,16 +6,7 @@
 
   <title>WebTheArt — Art Gallery</title>
 
-  <meta
-    name="description"
-    content="WebTheArt — Discover extraordinary artworks, artists and creative expression."
-  >
-
   <style>
-    /* =========================
-       RESET
-    ========================= */
-
     * {
       margin: 0;
       padding: 0;
@@ -28,9 +19,8 @@
 
     body {
       background: #0a0a0a;
-      color: #f4f1e8;
+      color: #f5f1e8;
       font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.6;
     }
 
     a {
@@ -38,34 +28,27 @@
       text-decoration: none;
     }
 
-    img {
-      width: 100%;
-      display: block;
-    }
-
-
-    /* =========================
-       HEADER
-    ========================= */
+    /* HEADER */
 
     header {
+    <img src="images/79789.jpg" alt="WebTheArt Artwork">
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
 
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(15px);
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(12px);
 
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     nav {
+      height: 80px;
       max-width: 1400px;
-      height: 82px;
       margin: auto;
-      padding: 0 40px;
+      padding: 0 30px;
 
       display: flex;
       align-items: center;
@@ -73,7 +56,7 @@
     }
 
     .logo {
-      font-size: 27px;
+      font-size: 25px;
       font-weight: bold;
       letter-spacing: 2px;
     }
@@ -85,7 +68,7 @@
 
     .nav-links {
       display: flex;
-      gap: 35px;
+      gap: 30px;
       list-style: none;
 
       font-family: Arial, sans-serif;
@@ -94,23 +77,28 @@
       letter-spacing: 2px;
     }
 
-    .nav-links a {
-      transition: opacity 0.3s;
+    /* HAMBURGER */
+
+    .menu-button {
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border: 1px solid rgba(255,255,255,0.3);
+      background: transparent;
+      color: white;
+
+      cursor: pointer;
+      font-size: 22px;
     }
 
-    .nav-links a:hover {
-      opacity: 0.5;
-    }
-
-
-    /* =========================
-       HERO
-    ========================= */
+    /* HERO */
 
     .hero {
       min-height: 100vh;
 
-      padding: 160px 40px 80px;
+      padding: 150px 30px 80px;
 
       display: flex;
       align-items: center;
@@ -119,43 +107,36 @@
         linear-gradient(
           90deg,
           rgba(0,0,0,0.9),
-          rgba(0,0,0,0.45),
-          rgba(0,0,0,0.75)
-        ),
-        url("https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=2200&q=90")
-        center / cover no-repeat;
+          rgba(0,0,0,0.45)
+        );
     }
 
     .hero-content {
-      max-width: 850px;
+      max-width: 800px;
+      margin: auto;
     }
 
     .eyebrow {
-      margin-bottom: 25px;
-
       font-family: Arial, sans-serif;
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 5px;
-
+      text-transform: uppercase;
       opacity: 0.65;
+      margin-bottom: 25px;
     }
 
     .hero h1 {
-      font-size: clamp(60px, 9vw, 125px);
+      font-size: clamp(60px, 9vw, 120px);
       font-weight: normal;
       line-height: 0.9;
-
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .hero p {
       max-width: 550px;
-
-      color: #c7c2b8;
-      font-size: 19px;
-
-      margin-bottom: 40px;
+      color: #aaa69e;
+      font-size: 18px;
+      margin-bottom: 35px;
     }
 
     .button {
@@ -163,7 +144,7 @@
 
       padding: 15px 30px;
 
-      border: 1px solid #f4f1e8;
+      border: 1px solid #f5f1e8;
 
       font-family: Arial, sans-serif;
       font-size: 11px;
@@ -174,17 +155,14 @@
     }
 
     .button:hover {
-      background: #f4f1e8;
+      background: #f5f1e8;
       color: #0a0a0a;
     }
 
-
-    /* =========================
-       GENERAL SECTIONS
-    ========================= */
+    /* SECTIONS */
 
     section {
-      padding: 110px 40px;
+      padding: 100px 30px;
     }
 
     .container {
@@ -192,33 +170,16 @@
       margin: auto;
     }
 
-    .section-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-
-      margin-bottom: 55px;
+    .section-title {
+      margin-bottom: 45px;
     }
 
-    .section-header h2 {
+    .section-title h2 {
       font-size: clamp(45px, 6vw, 75px);
       font-weight: normal;
-      line-height: 1;
     }
 
-    .section-header p {
-      max-width: 420px;
-
-      color: #99958c;
-
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-
-
-    /* =========================
-       ART GALLERY
-    ========================= */
+    /* GALLERY */
 
     .gallery {
       display: grid;
@@ -229,77 +190,49 @@
     .art-card {
       position: relative;
       overflow: hidden;
-
-      background: #151515;
-
-      cursor: pointer;
-    }
-
-    .art-card.big {
-      grid-row: span 2;
+      background: #161616;
     }
 
     .art-card img {
+      width: 100%;
       height: 430px;
       object-fit: cover;
 
-      transition: transform 0.7s ease;
-    }
-
-    .art-card.big img {
-      height: 880px;
+      transition: transform 0.6s;
     }
 
     .art-card:hover img {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
-    .art-overlay {
+    .art-info {
       position: absolute;
-      left: 0;
       bottom: 0;
+      left: 0;
 
       width: 100%;
+      padding: 30px 20px;
 
-      padding: 35px 25px;
-
-      background:
-        linear-gradient(
-          transparent,
-          rgba(0,0,0,0.95)
-        );
-
-      transform: translateY(15px);
-      opacity: 0;
-
-      transition: 0.4s;
+      background: linear-gradient(
+        transparent,
+        rgba(0,0,0,0.9)
+      );
     }
 
-    .art-card:hover .art-overlay {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .art-overlay small {
+    .art-info small {
       font-family: Arial, sans-serif;
       font-size: 10px;
-      text-transform: uppercase;
       letter-spacing: 2px;
-
-      opacity: 0.65;
+      text-transform: uppercase;
+      opacity: 0.7;
     }
 
-    .art-overlay h3 {
-      margin-top: 5px;
-
-      font-size: 25px;
+    .art-info h3 {
+      font-size: 24px;
       font-weight: normal;
     }
 
-
-    /* =========================
-       ABOUT WEBTHEART
-    ========================= */
+    /* ABOUT */
 
     .about {
       background: #151515;
@@ -308,36 +241,30 @@
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-
-      gap: 100px;
-
+      gap: 70px;
       align-items: center;
     }
 
     .about-image img {
-      height: 650px;
+      width: 100%;
+      height: 600px;
       object-fit: cover;
     }
 
-    .about-content h2 {
-      font-size: clamp(48px, 6vw, 80px);
+    .about-text h2 {
+      font-size: clamp(45px, 6vw, 75px);
       font-weight: normal;
       line-height: 0.95;
-
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
-    .about-content p {
+    .about-text p {
       color: #aaa69e;
       font-size: 18px;
-
       margin-bottom: 20px;
     }
 
-
-    /* =========================
-       COLLECTIONS
-    ========================= */
+    /* COLLECTIONS */
 
     .collections {
       display: grid;
@@ -346,34 +273,23 @@
     }
 
     .collection {
-      position: relative;
-
-      min-height: 390px;
-
-      padding: 35px;
+      min-height: 350px;
+      padding: 30px;
 
       display: flex;
       align-items: end;
 
-      overflow: hidden;
-
-      background-position: center;
       background-size: cover;
+      background-position: center;
+
+      position: relative;
     }
 
     .collection::before {
       content: "";
-
       position: absolute;
       inset: 0;
-
       background: rgba(0,0,0,0.4);
-
-      transition: 0.4s;
-    }
-
-    .collection:hover::before {
-      background: rgba(0,0,0,0.15);
     }
 
     .collection-content {
@@ -381,22 +297,12 @@
       z-index: 2;
     }
 
-    .collection-content small {
-      font-family: Arial, sans-serif;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
     .collection h3 {
-      font-size: 40px;
+      font-size: 38px;
       font-weight: normal;
     }
 
-
-    /* =========================
-       CONTACT
-    ========================= */
+    /* CONTACT */
 
     .contact {
       text-align: center;
@@ -404,34 +310,25 @@
     }
 
     .contact h2 {
-      font-size: clamp(55px, 8vw, 105px);
+      font-size: clamp(50px, 8vw, 100px);
       font-weight: normal;
-      line-height: 1;
-
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     .contact p {
       max-width: 550px;
-
-      margin: 0 auto 40px;
-
+      margin: 0 auto 35px;
       color: #99958c;
     }
 
-
-    /* =========================
-       FOOTER
-    ========================= */
+    /* FOOTER */
 
     footer {
-      padding: 45px 40px;
-
+      padding: 40px 30px;
       border-top: 1px solid rgba(255,255,255,0.1);
 
       font-family: Arial, sans-serif;
       font-size: 11px;
-
       color: #777;
     }
 
@@ -443,82 +340,63 @@
       justify-content: space-between;
     }
 
+    /* MOBILE */
 
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      nav {
-        padding: 0 20px;
-      }
+    @media (max-width: 800px) {
 
       .nav-links {
         display: none;
       }
 
-      section {
-        padding: 80px 20px;
+      .menu-button {
+        display: block;
       }
 
-      .hero {
-        padding: 140px 20px 70px;
+      .nav-links.active {
+        display: flex;
+
+        position: absolute;
+        top: 80px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 25px;
+
+        flex-direction: column;
+        gap: 20px;
+
+        background: #0a0a0a;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
       }
 
       .gallery {
         grid-template-columns: 1fr;
       }
 
-      .art-card.big {
-        grid-row: auto;
-      }
-
-      .art-card img,
-      .art-card.big img {
-        height: 500px;
-      }
-
       .about-grid {
         grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .about-image img {
-        height: 500px;
       }
 
       .collections {
         grid-template-columns: 1fr;
       }
 
-      .section-header {
-        display: block;
-      }
-
-      .section-header p {
-        margin-top: 20px;
+      .about-image img {
+        height: 450px;
       }
 
       .footer-content {
         display: block;
-      }
-
-      .footer-content div:last-child {
-        margin-top: 15px;
       }
     }
 
   </style>
 </head>
 
-
 <body>
 
-
-  <!-- =========================
-       NAVIGATION
-  ========================= -->
+  <!-- HEADER -->
 
   <header>
 
@@ -528,7 +406,7 @@
         WebThe<span>Art</span>
       </a>
 
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
 
         <li>
           <a href="#gallery">Gallery</a>
@@ -548,15 +426,22 @@
 
       </ul>
 
+      <!-- THREE LINE MENU -->
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        onclick="toggleMenu()"
+      >
+        ☰
+      </button>
+
     </nav>
 
   </header>
 
 
-
-  <!-- =========================
-       HERO
-  ========================= -->
+  <!-- HERO -->
 
   <section class="hero">
 
@@ -572,9 +457,9 @@
       </h1>
 
       <p>
-        Welcome to WebTheArt — a curated space where
-        creativity, imagination and artistic expression
-        come together.
+        Discover extraordinary artworks,
+        creative visions and artistic expression
+        at WebTheArt.
       </p>
 
       <a href="#gallery" class="button">
@@ -586,25 +471,21 @@
   </section>
 
 
-
-  <!-- =========================
-       FEATURED GALLERY
-  ========================= -->
+  <!-- GALLERY -->
 
   <section id="gallery">
 
     <div class="container">
 
-      <div class="section-header">
+      <div class="section-title">
+
+        <div class="eyebrow">
+          WebTheArt Gallery
+        </div>
 
         <h2>
           Featured Art
         </h2>
-
-        <p>
-          Explore a selection of remarkable artworks
-          presented by WebTheArt.
-        </p>
 
       </div>
 
@@ -612,23 +493,23 @@
       <div class="gallery">
 
 
-        <!-- ART 1 -->
+        <!-- YOUR ARTWORK -->
 
-        <div class="art-card big">
+        <div class="art-card">
 
           <img
-            src="https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=1200&q=90"
-            alt="Abstract artwork"
+            src="images/79789.jpg"
+            alt="WebTheArt Artwork"
           >
 
-          <div class="art-overlay">
+          <div class="art-info">
 
             <small>
               Featured Artwork
             </small>
 
             <h3>
-              Beyond Silence
+              Featured Work
             </h3>
 
           </div>
@@ -636,19 +517,19 @@
         </div>
 
 
-        <!-- ART 2 -->
+        <!-- OTHER ARTWORK -->
 
         <div class="art-card">
 
           <img
             src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1000&q=90"
-            alt="Modern artwork"
+            alt="Artwork"
           >
 
-          <div class="art-overlay">
+          <div class="art-info">
 
             <small>
-              Collection 01
+              Collection
             </small>
 
             <h3>
@@ -660,19 +541,17 @@
         </div>
 
 
-        <!-- ART 3 -->
-
         <div class="art-card">
 
           <img
             src="https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1000&q=90"
-            alt="Painting"
+            alt="Artwork"
           >
 
-          <div class="art-overlay">
+          <div class="art-info">
 
             <small>
-              Collection 02
+              Collection
             </small>
 
             <h3>
@@ -684,53 +563,6 @@
         </div>
 
 
-        <!-- ART 4 -->
-
-        <div class="art-card">
-
-          <img
-            src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?auto=format&fit=crop&w=1000&q=90"
-            alt="Contemporary artwork"
-          >
-
-          <div class="art-overlay">
-
-            <small>
-              Collection 03
-            </small>
-
-            <h3>
-              Fragments
-            </h3>
-
-          </div>
-
-        </div>
-
-
-        <!-- ART 5 -->
-
-        <div class="art-card">
-
-          <img
-            src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1000&q=90"
-            alt="Gallery artwork"
-          >
-
-          <div class="art-overlay">
-
-            <small>
-              Featured
-            </small>
-
-            <h3>
-              Unknown Forms
-            </h3>
-
-          </div>
-
-        </div>
-
       </div>
 
     </div>
@@ -738,10 +570,7 @@
   </section>
 
 
-
-  <!-- =========================
-       ABOUT
-  ========================= -->
+  <!-- ABOUT -->
 
   <section id="about" class="about">
 
@@ -749,18 +578,17 @@
 
       <div class="about-grid">
 
-
         <div class="about-image">
 
           <img
-            src="https://images.unsplash.com/photo-1561214115-7c6b7c0c5e91?auto=format&fit=crop&w=1200&q=90"
-            alt="WebTheArt gallery"
+            src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=90"
+            alt="WebTheArt Gallery"
           >
 
         </div>
 
 
-        <div class="about-content">
+        <div class="about-text">
 
           <div class="eyebrow">
             About WebTheArt
@@ -772,19 +600,15 @@
           </h2>
 
           <p>
-            WebTheArt is a creative art gallery dedicated
-            to discovering and presenting inspiring works
-            from talented artists.
+            WebTheArt is a creative art gallery
+            dedicated to discovering and presenting
+            inspiring artworks.
           </p>
 
           <p>
-            Our goal is to create a place where art can be
-            discovered, appreciated and remembered.
+            Explore artistic ideas, creative visions
+            and works that create meaningful connections.
           </p>
-
-          <a href="#contact" class="button">
-            Contact WebTheArt
-          </a>
 
         </div>
 
@@ -795,25 +619,21 @@
   </section>
 
 
-
-  <!-- =========================
-       COLLECTIONS
-  ========================= -->
+  <!-- COLLECTIONS -->
 
   <section id="collections">
 
     <div class="container">
 
-      <div class="section-header">
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Explore
+        </div>
 
         <h2>
           Collections
         </h2>
-
-        <p>
-          Explore different artistic styles and
-          creative perspectives.
-        </p>
 
       </div>
 
@@ -821,22 +641,17 @@
       <div class="collections">
 
 
-        <!-- COLLECTION 1 -->
-
         <a
-          href="#"
           class="collection"
-          style="
-            background-image:
-            url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=90');
-          "
+          href="#"
+          style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=90')"
         >
 
           <div class="collection-content">
 
-            <small>
-              01 — Collection
-            </small>
+            <div class="eyebrow">
+              Collection 01
+            </div>
 
             <h3>
               Abstract
@@ -847,22 +662,17 @@
         </a>
 
 
-        <!-- COLLECTION 2 -->
-
         <a
-          href="#"
           class="collection"
-          style="
-            background-image:
-            url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=90');
-          "
+          href="#"
+          style="background-image:url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=90')"
         >
 
           <div class="collection-content">
 
-            <small>
-              02 — Collection
-            </small>
+            <div class="eyebrow">
+              Collection 02
+            </div>
 
             <h3>
               Portraits
@@ -873,22 +683,17 @@
         </a>
 
 
-        <!-- COLLECTION 3 -->
-
         <a
-          href="#"
           class="collection"
-          style="
-            background-image:
-            url('https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=90');
-          "
+          href="#"
+          style="background-image:url('https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=1200&q=90')"
         >
 
           <div class="collection-content">
 
-            <small>
-              03 — Collection
-            </small>
+            <div class="eyebrow">
+              Collection 03
+            </div>
 
             <h3>
               Contemporary
@@ -906,10 +711,7 @@
   </section>
 
 
-
-  <!-- =========================
-       CONTACT
-  ========================= -->
+  <!-- CONTACT -->
 
   <section id="contact" class="contact">
 
@@ -924,13 +726,13 @@
       </h2>
 
       <p>
-        Interested in exhibitions, collaborations,
-        artwork submissions or working with WebTheArt?
-        We'd love to hear from you.
+        For exhibitions, collaborations,
+        artwork submissions or general inquiries,
+        contact WebTheArt.
       </p>
 
       <a
-        href="mailto:webtheart@artlover.com"
+        href="mailto:hello@webtheart.com"
         class="button"
       >
         Contact WebTheArt
@@ -941,10 +743,7 @@
   </section>
 
 
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
+  <!-- FOOTER -->
 
   <footer>
 
@@ -961,6 +760,21 @@
     </div>
 
   </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    function toggleMenu() {
+
+      const menu = document.getElementById("navLinks");
+
+      menu.classList.toggle("active");
+
+    }
+
+  </script>
 
 
 </body>
